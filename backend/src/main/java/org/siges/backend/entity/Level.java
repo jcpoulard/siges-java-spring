@@ -1,16 +1,15 @@
 package org.siges.backend.entity;
 
-
+import java.math.BigInteger;
 import java.util.Date;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -18,17 +17,27 @@ import org.hibernate.annotations.CreationTimestamp;
 import lombok.Data;
 
 @Entity
-@Table(name="sections")
+@Table(name="levels")
 @Data
-public class Section {
-
+public class Level {
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
 	private int id; 
 	
-	@Column(name="section_name")
-	private String sectionName; 
+	@Column(name="level_name")
+	private String levelName; 
+	
+	@Column(name="short_level_name")
+	private String shortLevelName; 
+	
+	@Column(name="previous_level")
+	private BigInteger previousLevel; 
+	
+	@ManyToOne
+	@JoinColumn(name="section", nullable=false)
+	private Section section; 
 	
 	@Column(name="date_created")
 	@CreationTimestamp
@@ -44,11 +53,11 @@ public class Section {
 	@Column(name="update_by")
 	private String updateBy; 
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="section")
-	private Set<Level> levels; 
 	
 	
 	
 	
 	
+	
+
 }
