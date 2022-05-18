@@ -1,16 +1,13 @@
 package org.siges.backend.entity;
 
-import java.math.BigDecimal;
+import java.time.LocalTime;
 import java.util.Date;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -18,35 +15,23 @@ import org.hibernate.annotations.CreationTimestamp;
 import lombok.Data;
 
 @Entity
-@Table(name="academicperiods")
+@Table(name="shifts")
 @Data
-public class AcademicPeriod {
-	
+public class Shift {
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
 	private int id; 
 	
-	@Column(name="name_period")
-	private String namePeriod; 
+	@Column(name="shift_name")
+	private String shiftName; 
 	
-	@Column(name="weight")
-	private BigDecimal weight; 
+	@Column(name="time_start")
+	private LocalTime timeStart; 
 	
-	@Column(name="date_start")
-	private Date dateStart; 
-	
-	@Column(name="date_end")
-	private Date dateEnd; 
-	
-	@Column(name="is_year")
-	private int isYear; 
-	
-	@Column(name="previous_academic_year")
-	private int previousAcademicYear; 
-	
-	@Column(name="year")
-	private int year; 
+	@Column(name="time_end")
+	private LocalTime timeEnd; 
 	
 	@Column(name="date_created")
 	@CreationTimestamp
@@ -60,10 +45,7 @@ public class AcademicPeriod {
 	private String createBy; 
 	
 	@Column(name="update_by")
-	private String updatedBy; 
-	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="academicPeriod")
-	private Set<Cycle> cycles; 
+	private String updateBy; 
 	
 	
 	
@@ -71,7 +53,4 @@ public class AcademicPeriod {
 	
 	
 	
-	
-	
-
 }
