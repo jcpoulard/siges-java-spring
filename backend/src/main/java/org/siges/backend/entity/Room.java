@@ -8,7 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.Data;
 
@@ -27,6 +31,29 @@ public class Room {
 	
 	@Column(name="short_room_name")
 	private String shortRoomName; 
+	
+	@ManyToOne
+	@JoinColumn(name="level", nullable=false)
+	private Level level; 
+	
+	@ManyToOne
+	@JoinColumn(name="shift", nullable=false)
+	private Shift shift; 
+	
+	@Column(name="date_created")
+	@CreationTimestamp
+	private Date dateCreated; 
+	
+	@Column(name="date_updated")
+	@CreationTimestamp
+	private Date dateUpdated; 
+	
+	@Column(name="create_by")
+	private String createBy; 
+	
+	@Column(name="update_by")
+	private String updateBy; 
+	
 	
 	
 }
